@@ -1,6 +1,7 @@
 package ru.korushov.superkassa.controller;
 
 import jakarta.validation.Valid;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.exception.LockTimeoutException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.korushov.superkassa.DTO.RequestDTO;
 import ru.korushov.superkassa.DTO.ResponseDTO;
+import ru.korushov.superkassa.exception.ExampleException;
 import ru.korushov.superkassa.model.Example;
 import ru.korushov.superkassa.service.ExampleService;
 
@@ -38,14 +40,13 @@ public class ExampleController {
     }
 
     @PostMapping("/modify")
-    public ResponseEntity<ResponseDTO> modify(@Valid @RequestBody RequestDTO requestDTO) throws Exception {
+    public ResponseEntity<ResponseDTO> modify(@Valid @RequestBody RequestDTO requestDTO) throws ExampleException {
             try{
                 ResponseDTO responseDTO = exampleService.increaseNumber(requestDTO);
                 return new ResponseEntity<>(responseDTO, HttpStatus.OK);
-            } catch (LockTimeoutException e) {
-                return new ResponseEntity<>(null, HttpStatus.I_AM_A_TEAPOT);
+            } catch (LockTimeoutException | ObjectNotFoundException e) {
+                throw new ExampleException(e.getMessage());
             }
-
     }
 
 }

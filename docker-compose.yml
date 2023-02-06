@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  db:
+    container_name: superkassa-db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: sk_example_db
+      POSTGRES_USER: sk_example_user
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_PASSWORD: password
+
+  app:
+    image: superkassa-app
+    build: ./
+    container_name: superkassa
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/sk_example_db
+      - SPRING_DATASOURCE_USERNAME=sk_example_user
+      - SPRING_DATASOURCE_PASSWORD=password
+    depends_on:
+      - db
+volumes:
+  db:
+    driver: local

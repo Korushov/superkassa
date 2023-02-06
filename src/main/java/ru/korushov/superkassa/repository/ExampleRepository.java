@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 import ru.korushov.superkassa.model.Example;
 
+import java.util.Optional;
+
 
 /**
  * @author Vitaly Korushov
