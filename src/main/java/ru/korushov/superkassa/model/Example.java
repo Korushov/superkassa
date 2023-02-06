@@ -13,7 +13,11 @@ import ru.korushov.superkassa.util.MyJson;
 
 @Entity
 @Table(name = "sk_example_table")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Example {
 
     @Id
@@ -25,22 +29,4 @@ public class Example {
     @JdbcTypeCode(SqlTypes.JSON)
     private MyJson obj;
 
-    public Example() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public MyJson getObj() {
-        return obj;
-    }
-
-    public void setObj(MyJson obj) {
-        this.obj = obj;
-    }
 }
