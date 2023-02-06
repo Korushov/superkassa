@@ -1,5 +1,6 @@
 package ru.korushov.superkassa.DTO;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,9 @@ import lombok.Setter;
 @Setter
 @Builder
 public class RequestDTO {
-    private int id;
-    private int add;
+
+    @NotNull
+    private Integer id;
+    @NotNull
+    private Integer add;
 }

@@ -18,5 +18,4 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class MyJson implements Serializable {
     private int current;
-
 }

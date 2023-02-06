@@ -18,7 +18,6 @@ import java.util.List;
 @Transactional
 public class ExampleService {
 
-    @Autowired
     private final ExampleRepository exampleRepository;
 
     @Autowired
@@ -36,7 +35,7 @@ public class ExampleService {
         int currentNumber = example.getObj().getCurrent();
         currentNumber += requestDTO.getAdd();
         example.setObj(new MyJson(currentNumber));
-        exampleRepository.update(example.getObj(), id);
+        exampleRepository.save(example);
         return new ResponseDTO(currentNumber);
     }
 

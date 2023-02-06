@@ -9,5 +9,8 @@ spring:
     hibernate:
       ddl-auto: validate
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    change-log:
+        db/changelog/changelog-master.yaml
 server:
   port: 8080
